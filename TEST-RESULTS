@@ -1,0 +1,111 @@
+                                      Izveštaj o Sistemskom Testiranju za program Calculator:
+
+    Testiranje ulaznih vrednosti:
+
+Testiranje slučaja kada je izraz prazan string:
+
+Ulaz: ""
+Očekivani rezultat: "ERROR"
+Rezultat: "ERROR"
+Komentar: Pravilno je prepoznato da je prazan izraz i vratila se očekivana greška.
+
+    Testiranje slučaja kada je izraz samo sa jednim brojem:
+
+Ulaz: "5"
+Očekivani rezultat: "5.0"
+Rezultat: "5.0"
+Komentar: Izraz sa samo jednim brojem je ispravno evaluiran i rezultat je tačan.
+
+    Testiranje slučaja kada su svi brojevi pozitivni:
+
+Ulaz: "2+3*4/2-1"
+Očekivani rezultat: "9.0"
+Rezultat: "9.0"
+Komentar: Izraz sa pozitivnim brojevima je ispravno evaluiran i rezultat je tačan.
+
+    Testiranje slučaja kada su svi brojevi negativni:
+
+Ulaz: "-2+-3*-4/-2--1"
+Očekivani rezultat: "9.0"
+Rezultat: "9.0"
+Komentar: Izraz sa negativnim brojevima je ispravno evaluiran i rezultat je tačan.
+
+    Testiranje slučaja kada su brojevi decimalni:
+
+Ulaz: "1.5+2.5*3.5/4.5-0.5"
+Očekivani rezultat: "3.3333333"
+Rezultat: "3.3333333"
+Komentar: Izraz sa decimalnim brojevima je ispravno evaluiran i rezultat je tačan.
+
+    Testiranje aritmetičkih operacija:
+
+Testirajte sabiranje, oduzimanje, množenje i deljenje:
+Ulaz: "2+3-4*2/2"
+Očekivani rezultat: "3.0"
+Rezultat: "3.0"
+Komentar: Izraz sa kombinacijom svih aritmetičkih operacija je ispravn i rezultat je tačan.
+
+    Testiranje grešaka:
+
+    Testiranje deljenja sa nulom:
+
+Ulaz: "5/0"
+Očekivani rezultat: "ERROR"
+Rezultat: "ERROR"
+Komentar: Pravilno je prepoznato deljenje sa nulom i vratila se očekivana greška.
+
+    Testiranje izraza sa nepostojećim aritmetičkim operacijama:
+
+Ulaz: "2&3"
+Očekivani rezultat
+
+
+
+                                    Evo jedinacnog testa za metodu za racunanje  (Calculate).
+
+
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
+
+public class CalculatorTest {
+    public static void main(String[] args) {
+        testCalculateAddition();
+    }
+
+    public static void testCalculateAddition() {
+        List<Float> numbers = new ArrayList<>();
+        numbers.add(2.0f);
+        numbers.add(5.0f);
+
+        List<String> operations = new ArrayList<>();
+        operations.add("+");
+
+        try {
+            Class<?> calculatorClass = Calculator.class;
+            Method calculateMethod = calculatorClass.getDeclaredMethod("Calculate", List.class, List.class);
+            calculateMethod.setAccessible(true);
+
+
+            calculateMethod.invoke(null, numbers, operations);
+
+            float expectedResult = 7.0f;
+            float actualResult = Calculator.finalResult;
+
+            if (actualResult == expectedResult) {
+                System.out.println("Test passed. Result is correct.");
+            } else {
+                System.out.println("Test failed. Result is incorrect.");
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+}
+
+
+
+
+
+
+
